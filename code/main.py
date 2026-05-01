@@ -27,6 +27,7 @@ import argparse
 import traceback
 from pathlib import Path
 from typing import Optional
+from env_utils import load_env_file
 
 # ─── Path setup ───────────────────────────────────────────────────────────────
 
@@ -213,6 +214,7 @@ def main():
     args = parse_args()
 
     # Check API key
+    load_env_file()
     api_key = os.environ.get("ANTHROPIC_API_KEY", "")
     if not api_key:
         print("⚠️  WARNING: ANTHROPIC_API_KEY not set. LLM responses will be fallback-only.")

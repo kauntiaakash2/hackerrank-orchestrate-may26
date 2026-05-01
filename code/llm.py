@@ -5,6 +5,7 @@ Fixes: ThinkingBlock issue — extract only text blocks from response.content.
 from __future__ import annotations
 import os, json, re, time
 from typing import Any, Dict, Optional
+from env_utils import load_env_file
 
 try:
     import anthropic
@@ -101,6 +102,7 @@ _CLIENT = None
 def get_client():
     global _CLIENT
     if _CLIENT is None and HAS_ANTHROPIC:
+        load_env_file()
         api_key = os.environ.get("ANTHROPIC_API_KEY", "")
         if api_key:
             # Support both modern and legacy Anthropic SDK constructors.
